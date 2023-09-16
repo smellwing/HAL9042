@@ -18,3 +18,4 @@ C:\Users\smell\source\repos\HAL9042\bin\Debug\net7.0\Microsoft.Extensions.Primit
 C:\Users\smell\source\repos\HAL9042\bin\Debug\net7.0\Whetstone.ChatGPT.dll
 C:\Users\smell\source\repos\HAL9042\obj\Debug\net7.0\HAL9042.csproj.AssemblyReference.cache
 C:\Users\smell\source\repos\HAL9042\obj\Debug\net7.0\HAL9042.csproj.CopyComplete
+C:\Users\smell\source\repos\HAL9042\bin\Debug\net7.0\appsettings.json
