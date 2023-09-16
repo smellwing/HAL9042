@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "ayPbm2oVar7uI7TE+c+7pmJz0VEk2ud8kvPWI4pLFmuwVGUPhirOkHTV7tXACFlPWeOep5CLHispT3g5y932vw==",
+  "dgSpecHash": "sEl8TJyK4drwKoA8gJhQWxhO0WjrO3gCb02tTIE+2vdCw64uxlXKH5o0Hf672DGXMgwkRawH8Eca+3rrQi3xnw==",
   "success": true,
   "projectFilePath": "C:\\Users\\smell\\source\\repos\\HAL9042\\HAL9042.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\smell\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\whetstone.chatgpt\\1.6.1\\whetstone.chatgpt.1.6.1.nupkg.sha512"
+  ],
   "logs": []
 }
