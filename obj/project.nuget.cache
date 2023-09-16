@@ -1,13 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "sEl8TJyK4drwKoA8gJhQWxhO0WjrO3gCb02tTIE+2vdCw64uxlXKH5o0Hf672DGXMgwkRawH8Eca+3rrQi3xnw==",
+  "dgSpecHash": "ElTAaf8rGDaXR/tz8JW+JlUeCQ8OxWG0vbRlZFN2iT80j9lGaFw4B/03i3GcmQSiGv7whKQCmIBFGwX4FMLliw==",
   "success": true,
   "projectFilePath": "C:\\Users\\smell\\source\\repos\\HAL9042\\HAL9042.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\smell\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\smell\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\smell\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\system.configuration.configurationmanager\\7.0.0\\system.configuration.configurationmanager.7.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\system.diagnostics.eventlog\\7.0.0\\system.diagnostics.eventlog.7.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
     "C:\\Users\\smell\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\system.security.cryptography.protecteddata\\7.0.0\\system.security.cryptography.protecteddata.7.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\system.security.permissions\\7.0.0\\system.security.permissions.7.0.0.nupkg.sha512",
+    "C:\\Users\\smell\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
     "C:\\Users\\smell\\.nuget\\packages\\whetstone.chatgpt\\1.6.1\\whetstone.chatgpt.1.6.1.nupkg.sha512"
   ],
   "logs": []

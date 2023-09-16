@@ -1,6 +1,7 @@
 ﻿using Whetstone.ChatGPT;
 using Whetstone.ChatGPT.Models;
 using System.Configuration;
+using System.Collections.Specialized;
 
 /// <summary>
 /// Clase principal del programa.
@@ -19,7 +20,8 @@ class Program
 
         Console.WriteLine ("¡Bienvenido al chat con ChatGPT!");
         Console.WriteLine ("Escribe '/exit' para salir del chat.");
-
+        string sAttr;
+        sAttr = ConfigurationManager.AppSettings.Get ("OpenAIAPIKey");
         while (true)
         {
             Console.Write ("Tú: ");
@@ -32,7 +34,7 @@ class Program
 
 
             // Inicializar el cliente de ChatGPT
-            using IChatGPTClient client = new ChatGPTClient ("YOUR_API_KEY");
+            using IChatGPTClient client = new ChatGPTClient (sAttr);
 
             chatHistory.Add ($"Tú: {userInput}");
 
