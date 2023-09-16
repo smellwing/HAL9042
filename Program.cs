@@ -1,5 +1,6 @@
 ﻿using Whetstone.ChatGPT;
 using Whetstone.ChatGPT.Models;
+using System.Configuration;
 
 /// <summary>
 /// Clase principal del programa.

@@ -11,10 +11,4 @@
     <PackageReference Include="Whetstone.ChatGPT" Version="1.6.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
