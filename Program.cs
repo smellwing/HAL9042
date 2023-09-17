@@ -57,7 +57,12 @@ class Program
             var response = await client.CreateChatCompletionAsync (gptRequest);
             var aiResponse = response?.GetCompletionText ();
             chatHistory.Add ($"ChatGPT: {aiResponse}");
-            Console.WriteLine ($"ChatGPT: {aiResponse}");
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine ($"ChatGPT: ");
+            Console.ResetColor ();
+            Console.WriteLine ($"{aiResponse}");
+
         }
 
         Console.WriteLine ("¡Chat finalizado!");
