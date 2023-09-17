@@ -397,6 +397,8 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-./App.config
-./bin/
-./obj/
+
+bin/
+obj/
+
+App.config
