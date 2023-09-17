@@ -59,7 +59,7 @@ class Program
             chatHistory.Add ($"ChatGPT: {aiResponse}");
             Console.BackgroundColor = ConsoleColor.DarkRed;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine ($"ChatGPT: ");
+            Console.WriteLine ($"ChatGPT");
             Console.ResetColor ();
             Console.WriteLine ($"{aiResponse}");
 
