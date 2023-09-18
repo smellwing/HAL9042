@@ -1,70 +1,66 @@
 ﻿using Whetstone.ChatGPT;
 using Whetstone.ChatGPT.Models;
 using System.Configuration;
+using HAL9042.Controls;
 using System.Collections.Specialized;
 
 /// <summary>
-/// Clase principal del programa.
+/// Clase principal del programa que facilita un chat interactivo con ChatGPT.
 /// </summary>
 class Program
 {
-
     /// <summary>
     /// Método principal del programa.
     /// </summary>
     /// <param name="args">Argumentos de la línea de comandos.</param>
-    static async Task Main ( string[] args )
+    static void Main ( string[] args )
     {
+        // Lista para mantener un registro del historial del chat.
         var chatHistory = new List<string> ();
+
+        // Comando para salir del chat.
         var exitCommand = "/exit";
 
         Console.WriteLine ("¡Bienvenido al chat con ChatGPT!");
         Console.WriteLine ("Escribe '/exit' para salir del chat.");
-        string sAttr;
-        sAttr = ConfigurationManager.AppSettings.Get ("OpenAIAPIKey");
+
+        // Creación de una instancia del controlador ChatGPT.
+        ChatGPTControl chatGPTControl = new ();
+
         while (true)
         {
             Console.Write ("Tú: ");
             var userInput = Console.ReadLine ();
 
+            // Verifica si el usuario quiere salir del chat.
             if (userInput is not null && userInput.Equals (exitCommand, StringComparison.OrdinalIgnoreCase))
             {
                 break;
             }
 
-
-            // Inicializar el cliente de ChatGPT
-            using IChatGPTClient client = new ChatGPTClient (sAttr);
-
+            // Agrega el mensaje del usuario al historial del chat.
             chatHistory.Add ($"Tú: {userInput}");
 
-            // Acá instanciamos el objeto de respuesta
-            var gptRequest = new ChatGPTChatCompletionRequest ()
-            {
-                Model = ChatGPT35Models.Turbo,
-                Messages = new List<ChatGPTChatCompletionMessage> ()
-                {
-                    new ChatGPTChatCompletionMessage()
-                    {
-                        Role = MessageRole.User,
-                        Content = userInput // Entrada del usuario
-                    }
-                },
-                // # Tokens = $ Stream = Respuestas largas
-                MaxTokens = 100
-            };
+            // Realiza una pregunta al controlador ChatGPT.
+            chatGPTControl.Ask (userInput);
 
-            var response = await client.CreateChatCompletionAsync (gptRequest);
-            var aiResponse = response?.GetCompletionText ();
-            chatHistory.Add ($"ChatGPT: {aiResponse}");
+            // Obtiene la respuesta de ChatGPT.
+            var aiResponse = chatGPTControl.Complete ();
+
+            // Agrega la respuesta de ChatGPT al historial del chat.
+            chatHistory.Add ($"ChatGPT: {aiResponse.Result.GetCompletionText ()}");
+
+            // Configura los colores de la consola para mostrar el encabezado de ChatGPT.
             Console.BackgroundColor = ConsoleColor.DarkRed;
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine ($"ChatGPT");
             Console.ResetColor ();
-            Console.WriteLine ($"{aiResponse}");
 
+            // Muestra la respuesta de ChatGPT.
+            Console.WriteLine ($"{aiResponse.Result.GetCompletionText ()}");
         }
 
+        // Mensaje de despedida al finalizar el chat.
         Console.WriteLine ("¡Chat finalizado!");
     }
 }
