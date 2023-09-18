@@ -1,45 +1,48 @@
 # README.md - Chat con ChatGPT
 
-## Introducci髇
+## Introducci贸n
 
-Este documento describe el funcionamiento y los detalles t閏nicos de un programa de chat interactivo que utiliza el modelo ChatGPT para generar respuestas basadas en la entrada del usuario.
+Este documento describe el funcionamiento y los detalles t茅cnicos de un programa de chat interactivo que utiliza el modelo ChatGPT para generar respuestas basadas en la entrada del usuario a trav茅s del control `ChatGPTControl` de `HAL9042.Controls`.
 
 ## Requerimientos
 
-- API Key de ChatGPT. Esta clave debe ser introducida en el campo "YOUR_API_KEY".
-- Librer韆s:
+- **API Key** de ChatGPT. Esta clave debe ser introducida en el archivo de configuraci贸n bajo la llave "OpenAIAPIKey".
+- **Librer铆as**:
   - Whetstone.ChatGPT
   - Whetstone.ChatGPT.Models
+  - System.Configuration
+  - HAL9042.Controls
 
 ## Funcionamiento General
 
-Cuando el usuario ejecuta el programa, se le da la bienvenida y se le indica que puede escribir `/exit` para salir del chat. A continuaci髇, el programa entra en un bucle donde espera la entrada del usuario. Una vez que el usuario proporciona una entrada, el programa se comunica con el modelo ChatGPT para obtener una respuesta y, posteriormente, la muestra al usuario.
+Al ejecutar el programa, el usuario es recibido con un mensaje de bienvenida y se le indica que puede escribir `/exit` para salir del chat. Posteriormente, el programa entra en un bucle donde aguarda la entrada del usuario. Al recibir una entrada, se comunica con ChatGPT para obtener una respuesta y la muestra en consola.
 
-## Detalles T閏nicos
+## Detalles T茅cnicos
 
-### Clases y M閠odos:
+### Clases y M茅todos:
 
-- **Program**: Clase principal del programa.
-  - **Main ( string[] args )**: M閠odo principal del programa. Maneja la interacci髇 del usuario y se comunica con el modelo ChatGPT para obtener respuestas.
+- **Program**: Clase principal que maneja la interacci贸n con el usuario.
+  - **Main ( string[] args )**: M茅todo principal del programa. Maneja la interacci贸n del usuario y se comunica con ChatGPT a trav茅s del control `ChatGPTControl`.
+  
+- **ChatGPTControl (HAL9042.Controls)**: Controlador para simplificar la interacci贸n con el modelo ChatGPT.
+  - **Ask (string usrAsk)**: Prepara la solicitud para ChatGPT bas谩ndose en la entrada del usuario.
+  - **Complete()**: Realiza la solicitud a ChatGPT y devuelve una respuesta.
 
-### Interacci髇 con el Modelo ChatGPT:
+### Interacci贸n con el Modelo ChatGPT:
 
-Se utiliza el cliente `IChatGPTClient` para comunicarse con el modelo. Para ello, se necesita una API Key que debe ser introducida en el campo "YOUR_API_KEY".
-
-El objeto `ChatGPTChatCompletionRequest` se utiliza para enviar la solicitud al modelo. En este programa, se ha establecido el modelo a `ChatGPT35Models.Turbo` y se ha limitado el n鷐ero m醲imo de tokens de respuesta a 100.
+Se utiliza el control `ChatGPTControl` para la comunicaci贸n con ChatGPT. Dicho control emplea el cliente `IChatGPTClient` para esta tarea. La clave API se obtiene desde la configuraci贸n del proyecto.
 
 ### Salida del Programa:
 
-El programa registra la historia de chat en una lista llamada `chatHistory`. Esta lista almacena tanto las entradas del usuario como las respuestas de ChatGPT.
+La interacci贸n con el chat (preguntas del usuario y respuestas de ChatGPT) se almacena en una lista llamada `chatHistory`.
 
 ## Uso:
 
-1. Ejecute el programa.
-2. Introduzca cualquier texto para chatear con ChatGPT.
-3. Para salir del chat, escriba `/exit`.
+1. Aseg煤rese de introducir su API Key de ChatGPT en el archivo de configuraci贸n bajo la llave "OpenAIAPIKey".
+2. Ejecute el programa.
+3. Introduzca cualquier texto para iniciar la conversaci贸n con ChatGPT.
+4. Escriba `/exit` para finalizar el chat.
 
 ---
 
-**Nota 1**: Aseg鷕ese de tener una API Key v醠ida de ChatGPT para que el programa funcione correctamente.
-
-**Nota 2**: Este README.md fue generado por ChatGPT.
+**Nota**: Este README.md fue generado por ChatGPT.
