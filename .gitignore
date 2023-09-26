@@ -402,3 +402,5 @@ bin/
 obj/
 
 App.config
+
+.idea/.idea.HAL9042/.idea/
