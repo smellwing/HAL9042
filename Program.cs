@@ -31,12 +31,11 @@ class Program
         {
             Console.Write ("Tú: ");
             var userInput = Console.ReadLine ();
+            var c = new Commands(userInput);
 
             // Verifica si el usuario quiere salir del chat.
-            if (userInput is not null && userInput.Equals (exitCommand, StringComparison.OrdinalIgnoreCase))
-            {
-                break;
-            }
+            if (c.Exit) break;
+            
 
             // Agrega el mensaje del usuario al historial del chat.
             chatHistory.Add ($"Tú: {userInput}");
