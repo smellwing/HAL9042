@@ -59,13 +59,22 @@ namespace HAL9042.Controls
         /// Realiza la solicitud al modelo ChatGPT y obtiene una respuesta.
         /// </summary>
         /// <returns>Respuesta del modelo ChatGPT.</returns>
-        public async Task<ChatGPTChatCompletionResponse> Complete ()
+        public async Task GetResponse ()
         {
             // Aquí, patito, estamos inicializando el cliente de ChatGPT con nuestra clave API.
             using IChatGPTClient client = new ChatGPTClient (APIKey);
 
             // Y ahora, enviamos nuestra solicitud al cliente y esperamos la respuesta.
-            return await client.CreateChatCompletionAsync (Request);
+            Response = await client.CreateChatCompletionAsync (Request);
+        }
+
+        /// <summary>
+        /// Obtiene el texto de una respuesta.
+        /// </summary>
+        /// <returns>Respuesta del modelo ChatGPT.</returns>
+        public string GetResponseText ()
+        {
+            return Response.GetCompletionText ();
         }
     }
 }
