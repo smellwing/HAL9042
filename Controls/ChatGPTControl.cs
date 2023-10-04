@@ -23,6 +23,8 @@ namespace HAL9042.Controls
         // Solicitud que se envía al modelo ChatGPT.
         private ChatGPTChatCompletionRequest Request { get; set; }
 
+        public MessageRole MessageRole { get; set; } = MessageRole.User;
+
         /// <summary>
         /// Constructor que inicializa la clave API desde la configuración.
         /// </summary>
@@ -30,6 +32,7 @@ namespace HAL9042.Controls
         {
             // Obtiene la clave API de la configuración del proyecto.
             APIKey = ConfigurationManager.AppSettings.Get ("OpenAIAPIKey");
+
         }
 
         /// <summary>
@@ -47,11 +50,11 @@ namespace HAL9042.Controls
                 {
                     new ChatGPTChatCompletionMessage()
                     {
-                        Role = MessageRole.User,   // Estamos especificando que el rol del mensaje es del usuario.
+                        Role = MessageRole,   // Estamos especificando que el rol del mensaje es del usuario.
                         Content = usrAsk          // Y aquí colocamos la pregunta que el usuario hizo.
                     }
                 },
-                MaxTokens = 100 // Estamos limitando la respuesta a 100 tokens.
+                MaxTokens = 200 // Estamos limitando la respuesta a 200 tokens.
             };
         }
 

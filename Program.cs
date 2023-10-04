@@ -28,7 +28,7 @@ class Program
         ChatInvoker invoker = new ();
 
         // Si se pasan argumentos y el primer argumento es "-ask"
-        if (args.Length > 1 && args[0] == "-ask")
+        if (args.Length > 1 && args[0] == "-a")
         {
             var userInput = args[1]; // Tomamos el segundo argumento como entrada del usuario
             chatHistory.Add ($"Tú: {userInput}");
@@ -40,12 +40,17 @@ class Program
             
             chatHistory.Add ($"ChatGPT: {chatGPTControl.GetResponseText()}");
 
-            Console.WriteLine ($"Respuesta de ChatGPT a '{userInput}': {chatGPTControl.GetResponseText ()}");
+            // Configura los colores de la consola para mostrar el encabezado de ChatGPT.
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine ($"Respuesta de HAL\n\r");
+            Console.ResetColor ();
+            Console.WriteLine ($"\t{chatGPTControl.GetResponseText ()}");
             return; // Finalizamos el programa después de responder al argumento
         }   else
         {
 
-            Console.WriteLine ("¡Bienvenido al chat con ChatGPT!");
+            Console.WriteLine ("¡Bienvenido al chat con HAL9042!");
             Console.WriteLine ("Escribe '/exit' para salir del chat.");
         }
 
@@ -53,7 +58,7 @@ class Program
         {
             Console.Write ("Tú: ");
             var userInput = Console.ReadLine ();
-            var c = new Commands(userInput);
+            var c = new CLICommands(userInput);
 
             // Verifica si el usuario quiere salir del chat.
             if (c.Exit) break;
@@ -73,7 +78,7 @@ class Program
             // Configura los colores de la consola para mostrar el encabezado de ChatGPT.
             Console.BackgroundColor = ConsoleColor.DarkRed;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine ($"ChatGPT");
+            Console.WriteLine ($"HAL");
             Console.ResetColor ();
 
             // Muestra la respuesta de ChatGPT.

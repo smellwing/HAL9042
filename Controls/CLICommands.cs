@@ -2,13 +2,13 @@
 
 namespace HAL9042.Controls;
 
-public class Commands : ICommands
+public class CLICommands : ICLICommands
 {
     const string ExitCommand = "/exit";
     const string HelpCommand = "/help";
     public bool Exit { get; set; } = false;
     
-    public Commands(string userInput)
+    public CLICommands(string userInput)
     {
         if (userInput is not null)
         {
