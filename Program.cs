@@ -20,9 +20,6 @@ class Program
         // Lista para mantener un registro del historial del chat.
         var chatHistory = new List<string> ();
 
-        // Comando para salir del chat.
-        var exitCommand = "/exit";
-
         // Creación de una instancia del controlador ChatGPT.
         ChatGPTControl chatGPTControl = new ();
         ChatInvoker invoker = new ();
