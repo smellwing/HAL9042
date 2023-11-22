@@ -3,8 +3,9 @@ using Whetstone.ChatGPT.Models;
 using System.Configuration;
 using HAL9042.Controls;
 using System.Collections.Specialized;
-using HAL9042.Invokers;
 using HAL9042.Interfaces;
+using HAL9042.Handles;
+using HAL9042;
 
 /// <summary>
 /// Clase principal del programa que facilita un chat interactivo con ChatGPT.
@@ -22,7 +23,8 @@ class Program
 
         // Creación de una instancia del controlador ChatGPT.
         ChatGPTControl chatGPTControl = new ();
-        ChatInvoker invoker = new ();
+        CLIControl cliControl = new ();
+        Invoker invoker = new ();
 
         // Si se pasan argumentos y el primer argumento es "-ask"
         if (args.Length > 1 && args[0] == "-a")
@@ -31,11 +33,11 @@ class Program
             chatHistory.Add ($"Tú: {userInput}");
 
             // Usando el patrón Command
-            ICommand command = new SendMessageCommand (chatGPTControl, userInput);
+            ICommand command = new HandleSendMessageCommand (chatGPTControl, userInput);
             invoker.SetCommand (command);
-            await invoker.ExecuteCommand ();            
-            
-            chatHistory.Add ($"ChatGPT: {chatGPTControl.GetResponseText()}");
+            await invoker.ExecuteCommand ();
+
+            chatHistory.Add ($"ChatGPT: {chatGPTControl.GetResponseText ()}");
 
             // Configura los colores de la consola para mostrar el encabezado de ChatGPT.
             Console.BackgroundColor = ConsoleColor.DarkRed;
@@ -44,7 +46,7 @@ class Program
             Console.ResetColor ();
             Console.WriteLine ($"\t{chatGPTControl.GetResponseText ()}");
             return; // Finalizamos el programa después de responder al argumento
-        }   else
+        } else
         {
 
             Console.WriteLine ("¡Bienvenido al chat con HAL9042!");
@@ -54,23 +56,37 @@ class Program
         while (true)
         {
             Console.Write ("Tú: ");
-            var userInput = Console.ReadLine ();
-            var c = new CLICommands(userInput);
+            var userInput = Console.ReadLine ().Trim ();
+            if (userInput is not null && userInput[0] == '/')
+            {
+                //CLIControl c = new (userInput[1..] ?? string.Empty);
+                // Create a command to handle CLI commands and execute it.
+                ICommand cliCommand = new HandleCLICommand (cliControl, userInput[1..]);
+                invoker.SetCommand (cliCommand);
+                await invoker.ExecuteCommand ();
 
-            // Verifica si el usuario quiere salir del chat.
-            if (c.Exit) break;
-            
+                //var exitRequested = await invoker.ExecuteCommand ();
+
+                //// Check if the exit command was triggered.
+                if (cliControl.Exit)
+                {
+                    // Exit the chat loop.
+                    break;
+                }
+
+            }
+
 
             // Agrega el mensaje del usuario al historial del chat.
             chatHistory.Add ($"Tú: {userInput}");
 
             // Usando el patrón Command
-            ICommand command = new SendMessageCommand (chatGPTControl, userInput);
+            ICommand command = new HandleSendMessageCommand (chatGPTControl, userInput);
             invoker.SetCommand (command);
             await invoker.ExecuteCommand ();
-                        
+
             // Agrega la respuesta de ChatGPT al historial del chat.
-            chatHistory.Add ($"ChatGPT: {chatGPTControl.GetResponseText()}");
+            chatHistory.Add ($"ChatGPT: {chatGPTControl.GetResponseText ()}");
 
             // Configura los colores de la consola para mostrar el encabezado de ChatGPT.
             Console.BackgroundColor = ConsoleColor.DarkRed;

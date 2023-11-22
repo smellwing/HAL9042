@@ -23,7 +23,7 @@ namespace HAL9042.Controls
         // Solicitud que se envía al modelo ChatGPT.
         private ChatGPTChatCompletionRequest Request { get; set; }
 
-        public MessageRole MessageRole { get; set; } = MessageRole.User;
+        
 
         /// <summary>
         /// Constructor que inicializa la clave API desde la configuración.
@@ -45,16 +45,21 @@ namespace HAL9042.Controls
             // Esta solicitud tiene el modelo que queremos usar, los mensajes y el número máximo de tokens que queremos como respuesta.
             Request = new ChatGPTChatCompletionRequest ()
             {
-                Model = ChatGPT35Models.Turbo,
+                Model = ChatGPT4Models.GPT4,
                 Messages = new List<ChatGPTChatCompletionMessage> ()
                 {
                     new ChatGPTChatCompletionMessage()
                     {
-                        Role = MessageRole,   // Estamos especificando que el rol del mensaje es del usuario.
+                        Role = ChatGPTMessageRoles.Assistant,   // Estamos especificando que el rol del mensaje es del usuario.
+                        Content = "Cuando respondas, hazlo imitando el estilo y tono de HAL 9000 de \"2001: A Space Odyssey\". Mantén una voz calmada, cortés y algo distante, característica de HAL. Tus respuestas deben ser precisas y directas, mostrando inteligencia y cierta dosis de misterio que rodea a HAL 9000."
+                    },
+                    new ChatGPTChatCompletionMessage()
+                    {
+                        Role = ChatGPTMessageRoles.User,   // Estamos especificando que el rol del mensaje es del usuario.
                         Content = usrAsk          // Y aquí colocamos la pregunta que el usuario hizo.
                     }
                 },
-                MaxTokens = 200 // Estamos limitando la respuesta a 200 tokens.
+                MaxTokens = 500 // Estamos limitando la respuesta a 500 tokens.
             };
         }
 
