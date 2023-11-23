@@ -1,4 +1,4 @@
-﻿using Whetstone.ChatGPT;
+using Whetstone.ChatGPT;
 using Whetstone.ChatGPT.Models;
 using System.Configuration;
 using HAL9042.Controls;
@@ -40,9 +40,9 @@ class Program
             chatHistory.Add ($"ChatGPT: {chatGPTControl.GetResponseText ()}");
 
             // Configura los colores de la consola para mostrar el encabezado de ChatGPT.
-            Console.BackgroundColor = ConsoleColor.DarkRed;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine ($"Respuesta de HAL\n\r");
+            //Console.BackgroundColor = ConsoleColor.DarkRed;
+            //Console.ForegroundColor = ConsoleColor.Yellow;
+            //Console.WriteLine ($"Respuesta de HAL\n\r");
             Console.ResetColor ();
             Console.WriteLine ($"\t{chatGPTControl.GetResponseText ()}");
             return; // Finalizamos el programa después de responder al argumento
