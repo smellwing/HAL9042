@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HAL9042": {
+      "commandName": "Project",
+      "commandLineArgs": "-c \"Listar directorio en PowerShell\""
+    }
+  }
+}

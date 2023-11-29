@@ -28,14 +28,19 @@ class Program
 
             if (argsList.Any (s => s == "-c"))
             {
-                var index = argsList.FindIndex (s => s == "-a");
+                var index = argsList.FindIndex (s => s == "-c");
                 var userInput = args[index + 1]; // Tomamos el segundo argumento como entrada del usuario
                 chatHistory.Add ($"Tú: {userInput}");
 
                 // Usando el patrón Command
-                ICommand command = new HandleSendMessageCommand (chatGPTControl, userInput);
+                ICommand command = new HandleSendMessageCommand (chatGPTControl, userInput, true);
                 invoker.SetCommand (command);
                 await invoker.ExecuteCommand ();
+                var response = chatGPTControl.GetResponseText ();
+                Console.ResetColor ();
+                Console.WriteLine ($"\t{response}");
+                chatHistory.Add ($"ChatGPT: {response}");
+
             }
             if (argsList.Any (s => s == "-a"))
             {
