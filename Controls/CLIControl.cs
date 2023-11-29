@@ -25,14 +25,16 @@ public class CLIControl
         //}
     }
 
-    public void Read( string command )
+    public async 
+    Task
+Read( string command )
     {
         if(command == "exit")
         {
             Exit = true;
         }
     }
-    public string Help()
+    public async Task<string> Help()
     {
         return "Comandos disponibles:\n" +
                "/exit: Salir del chat.";

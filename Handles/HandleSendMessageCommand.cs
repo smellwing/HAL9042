@@ -17,15 +17,18 @@ namespace HAL9042.Handles
         // Mensaje a ser enviado.
         private readonly string _message;
 
+        private readonly bool _commandsMode;
+
         /// <summary>
         /// Constructor para inicializar con un control de ChatGPT y un mensaje.
         /// </summary>
         /// <param name="control">Control de ChatGPT.</param>
         /// <param name="message">Mensaje a enviar.</param>
-        public HandleSendMessageCommand ( ChatGPTControl control, string message )
+        public HandleSendMessageCommand ( ChatGPTControl control, string message , bool comandsMode = false)
         {
             _chatGPTControl = control;
             _message = message;
+            _commandsMode = comandsMode;
         }
 
         /// <summary>
@@ -48,7 +51,14 @@ namespace HAL9042.Handles
             // Espera y obtiene la respuesta del control de ChatGPT.
             if (_chatGPTControl != null)
             {
-                _chatGPTControl.Ask (_message);
+                if (_commandsMode) {
+                    _chatGPTControl.AskCommand (_message);
+                }
+                else {
+                    _chatGPTControl.Ask (_message);
+                }
+                
+
                 await _chatGPTControl.GetResponse ();
             }
             if (_cliControl != null)

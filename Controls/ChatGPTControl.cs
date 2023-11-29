@@ -84,5 +84,29 @@ namespace HAL9042.Controls
         {
             return Response.GetCompletionText ();
         }
+
+        internal void AskCommand ( string message )
+        {
+            // Okay, patito. Aquí estamos configurando la solicitud para el modelo ChatGPT.
+            // Esta solicitud tiene el modelo que queremos usar, los mensajes y el número máximo de tokens que queremos como respuesta.
+            Request = new ChatGPTChatCompletionRequest ()
+            {
+                Model = ChatGPT4Models.GPT4,
+                Messages = new List<ChatGPTChatCompletionMessage> ()
+                {
+                    new ChatGPTChatCompletionMessage()
+                    {
+                        Role = ChatGPTMessageRoles.Assistant,   // Estamos especificando que el rol del mensaje es del usuario.
+                        Content = "Cuando te pida un comando, responde únicamente con el comando necesario para la acción solicitada. No incluyas explicaciones, detalles adicionales ni ejemplos. Simplemente proporciona el comando como respuesta."
+                    },
+                    new ChatGPTChatCompletionMessage()
+                    {
+                        Role = ChatGPTMessageRoles.User,   // Estamos especificando que el rol del mensaje es del usuario.
+                        Content = message          // Y aquí colocamos la pregunta que el usuario hizo.
+                    }
+                },
+                MaxTokens = 500 // Estamos limitando la respuesta a 500 tokens.
+            };
+        }
     }
 }
