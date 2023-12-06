@@ -39,7 +39,7 @@ namespace HAL9042.Controls
         /// Prepara la solicitud para el modelo ChatGPT con la pregunta del usuario.
         /// </summary>
         /// <param name="usrAsk">Pregunta del usuario.</param>
-        public async void Ask ( string usrAsk )
+        public void Ask ( string usrAsk )
         {
             // Okay, patito. Aquí estamos configurando la solicitud para el modelo ChatGPT.
             // Esta solicitud tiene el modelo que queremos usar, los mensajes y el número máximo de tokens que queremos como respuesta.
@@ -48,7 +48,7 @@ namespace HAL9042.Controls
                 Model = ChatGPT4Models.GPT4,
                 Messages = new List<ChatGPTChatCompletionMessage> ()
                 {
-                    new ChatGPTChatCompletionMessage()
+                    new()
                     {
                         Role = ChatGPTMessageRoles.Assistant,   // Estamos especificando que el rol del mensaje es del usuario.
                         Content = "Cuando respondas, hazlo imitando el estilo y tono de HAL 9000 de \"2001: A Space Odyssey\". Mantén una voz calmada, cortés y algo distante, característica de HAL. Tus respuestas deben ser precisas y directas, mostrando inteligencia y cierta dosis de misterio que rodea a HAL 9000."
@@ -83,6 +83,30 @@ namespace HAL9042.Controls
         public string GetResponseText ()
         {
             return Response.GetCompletionText ();
+        }
+
+        internal void AskCommand ( string message )
+        {
+            // Okay, patito. Aquí estamos configurando la solicitud para el modelo ChatGPT.
+            // Esta solicitud tiene el modelo que queremos usar, los mensajes y el número máximo de tokens que queremos como respuesta.
+            Request = new ChatGPTChatCompletionRequest ()
+            {
+                Model = ChatGPT4Models.GPT4,
+                Messages = new List<ChatGPTChatCompletionMessage> ()
+                {
+                    new()
+                    {
+                        Role = ChatGPTMessageRoles.Assistant,   // Estamos especificando que el rol del mensaje es del usuario.
+                        Content = "Cuando te pida un comando, responde únicamente con el comando necesario para la acción solicitada. No incluyas explicaciones, detalles adicionales, marcos de codigo de markdown ni ejemplos. Simplemente proporciona el comando como respuesta."
+                    },
+                    new()
+                    {
+                        Role = ChatGPTMessageRoles.User,   // Estamos especificando que el rol del mensaje es del usuario.
+                        Content = message          // Y aquí colocamos la pregunta que el usuario hizo.
+                    }
+                },
+                MaxTokens = 500 // Estamos limitando la respuesta a 500 tokens.
+            };
         }
     }
 }
