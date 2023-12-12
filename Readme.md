@@ -1,53 +1,65 @@
-# README.md - Chat con ChatGPT
 
-## Introducción
+# HAL9042 Chat Interface
 
-Este documento describe el funcionamiento y los detalles técnicos de un programa de chat interactivo que utiliza el modelo ChatGPT para generar respuestas basadas en la entrada del usuario. Este programa ha sido diseñado utilizando el patrón de diseño Command para gestionar las interacciones con el modelo ChatGPT.
+## Overview
 
-## Requerimientos
+HAL9042 is a sophisticated chat interface designed to interact with ChatGPT. It employs a command pattern to process user inputs and ChatGPT responses, providing a seamless and interactive chat experience.
 
-- API Key de ChatGPT. Esta clave debe ser introducida en el campo "YOUR_API_KEY".
-- Librerías:
-  - Whetstone.ChatGPT
-  - Whetstone.ChatGPT.Models
+### Features
+- **Interactive Chat Interface**: Communicate with ChatGPT through a console-based interface.
+- **Command Handling**: Uses the Command design pattern to handle chat and CLI commands.
+- **Chat History Tracking**: Maintains a log of the chat history for reference but still do nothing.
+- **Customizable Responses**: Supports different modes of operation through command line arguments: Ask like chat or yus ask for commands!
 
-## Funcionamiento General
+## Getting Started
 
-Cuando el usuario ejecuta el programa, se le da la bienvenida y se le indica que puede escribir `/exit` para salir del chat. A continuación, el programa entra en un bucle donde espera la entrada del usuario. Una vez que el usuario proporciona una entrada, el programa se comunica con el modelo ChatGPT utilizando el patrón Command para obtener una respuesta y, posteriormente, la muestra al usuario.
+### Prerequisites
+- .NET Core 3.1 or higher.
+- Basic understanding of C# and command line operations.
 
-## Detalles Técnicos
+### Installation
+1. Clone the repository:
+   ```sh
+   git clone [repository-url]
+   ```
+2. Navigate to the project directory and build the project:
+   ```sh
+   dotnet build
+   ```
 
-### Clases y Métodos:
+### Running HAL9042
+To start HAL9042, use the following command:
+```sh
+dotnet run
+```
 
-- **Program**: Clase principal del programa.
-  - **Main ( string[] args )**: Método principal del programa. Maneja la interacción del usuario y se comunica con el modelo ChatGPT para obtener respuestas utilizando el patrón Command.
-  
-- **ICommand**: Define una interfaz para ejecutar una operación relacionada con el chat.
-  
-- **SendMessageCommand**: Implementa `ICommand` para enviar un mensaje a ChatGPT.
-  
-- **ChatInvoker**: Pide al command que ejecute la solicitud.
+## Usage
 
-### Interacción con el Modelo ChatGPT:
+### Basic Operation
+Start the program and interact with the ChatGPT interface through the console.
 
-Se utiliza el cliente `IChatGPTClient` para comunicarse con el modelo. Para ello, se necesita una API Key que debe ser introducida en el campo "YOUR_API_KEY".
+### Command Line Arguments
+- `-a [input]`: Ask any question and you get the answer from ChatGPT!
+- `-c [input]`: Ask for any CLI command and you get it!
 
-El objeto `ChatGPTChatCompletionRequest` se utiliza para enviar la solicitud al modelo. En este programa, se ha establecido el modelo a `ChatGPT35Models.Turbo` y se ha limitado el número máximo de tokens de respuesta a 100.
+### Exiting the Program
+Type `/exit` in the chat interface to terminate the session.
 
-### Salida del Programa:
+## Code Structure
 
-El programa registra la historia de chat en una lista llamada `chatHistory`. Esta lista almacena tanto las entradas del usuario como las respuestas de ChatGPT.
+### Key Components
+- `ChatGPTControl`: Handles interactions with ChatGPT.
+- `CLIControl`: Manages command line interface operations.
+- `Invoker`: Executes the commands.
+- `HandleSendMessageCommand`: Command pattern implementation for sending messages.
 
-## Uso:
+### Main Loop
+The `while` loop in the `Main` method facilitates continuous interaction until the `/exit` command is triggered.
 
-1. Ejecute el programa.
-2. Introduzca cualquier texto para chatear con ChatGPT.
-3. Para salir del chat, escriba `/exit`.
+## Contribution
 
----
+Contributions are welcome. Please fork the repository and submit pull requests with your changes.
 
-**Nota 1**: Asegúrese de tener una API Key válida de ChatGPT para que el programa funcione correctamente.
+## License
 
-**Nota 2**: Este README.md fue generado por ChatGPT.
-
-**Nota 3**: Este programa utiliza el patrón de diseño Command para gestionar las interacciones con el modelo ChatGPT.
+This project is licensed under the [MIT License](LICENSE.md).
